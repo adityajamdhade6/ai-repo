@@ -82,24 +82,32 @@
           <div class="coin__face">
             <svg viewBox="0 0 300 300" class="coin__svg">
               <defs>
-                <radialGradient id="coinG" cx="38%" cy="32%" r="75%">
-                  <stop offset="0%" stop-color="#fff7ec" stop-opacity=".9"/>
-                  <stop offset="45%" stop-color="var(--accent)"/>
-                  <stop offset="100%" stop-color="#6e2a0b"/>
+                <radialGradient id="coinG" cx="38%" cy="30%" r="80%">
+                  <stop offset="0%" stop-color="#f1ddb0"/>
+                  <stop offset="34%" stop-color="#d9b074"/>
+                  <stop offset="64%" stop-color="#a8703a"/>
+                  <stop offset="86%" stop-color="#6f4420"/>
+                  <stop offset="100%" stop-color="#4d2e14"/>
+                </radialGradient>
+                <radialGradient id="coinDust" cx="62%" cy="66%" r="55%">
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity=".62"/>
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
                 </radialGradient>
               </defs>
               <circle cx="150" cy="150" r="148" fill="url(#coinG)"/>
-              <circle cx="150" cy="150" r="132" fill="none" stroke="#11100e" stroke-opacity=".18" stroke-width="1.5"/>
-              <circle cx="150" cy="150" r="112" fill="none" stroke="#11100e" stroke-opacity=".12" stroke-width="1"/>
+              <circle cx="150" cy="150" r="148" fill="url(#coinDust)" style="mix-blend-mode:soft-light"/>
+              <circle cx="150" cy="150" r="148" fill="none" stroke="#3d2410" stroke-opacity=".5" stroke-width="4"/>
+              <circle cx="150" cy="150" r="132" fill="none" stroke="#3d2410" stroke-opacity=".22" stroke-width="1.5"/>
+              <circle cx="150" cy="150" r="112" fill="none" stroke="#3d2410" stroke-opacity=".16" stroke-width="1"/>
               <g id="coinHoles"></g>
               <g class="coin__type">
                 <path id="coinTextPath" d="M150,150 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0" fill="none"/>
-                <text font-family="JetBrains Mono, monospace" font-size="15" letter-spacing="6" fill="#11100e" fill-opacity=".55">
+                <text font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="5.5" fill="#3d2410" fill-opacity=".62">
                   <textPath href="#coinTextPath" startOffset="0">INHAUS · ROASTED IN-HAUS · COIN KHAKHRA · INHAUS · ROASTED IN-HAUS · </textPath>
                 </text>
               </g>
-              <circle cx="150" cy="150" r="46" fill="none" stroke="#11100e" stroke-opacity=".25" stroke-width="1"/>
-              <circle cx="150" cy="150" r="6" fill="#11100e" fill-opacity=".4"/>
+              <circle cx="150" cy="150" r="46" fill="none" stroke="#3d2410" stroke-opacity=".3" stroke-width="1"/>
+              <circle cx="150" cy="150" r="6" fill="#3d2410" fill-opacity=".5"/>
             </svg>
           </div>
         </div>

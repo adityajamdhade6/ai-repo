@@ -125,14 +125,20 @@
   (function coinHoles() {
     var g = byId("coinHoles");
     if (!g) return;
-    var n = 46, html = "";
+    var n = 120, html = "";
     for (var i = 0; i < n; i++) {
       var a = Math.random() * Math.PI * 2;
-      var r = 24 + Math.random() * 96;
+      var r = 8 + Math.random() * 130;
       var cx = 150 + Math.cos(a) * r;
       var cy = 150 + Math.sin(a) * r;
-      var rad = (Math.random() * 3 + 1).toFixed(1);
-      html += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + rad + '" fill="#11100e" fill-opacity="' + (0.1 + Math.random() * 0.18).toFixed(2) + '"/>';
+      var rad = (Math.random() * 3.2 + 0.6).toFixed(1);
+      // mostly toasted char blisters; a few lighter flour spots; some flavour spice flecks
+      var roll = Math.random();
+      var fill, op;
+      if (roll < 0.62) { fill = "#3d2410"; op = (0.18 + Math.random() * 0.4).toFixed(2); }       // char
+      else if (roll < 0.82) { fill = "#fff0d0"; op = (0.1 + Math.random() * 0.28).toFixed(2); }   // toasted highlight
+      else { fill = "var(--accent)"; op = (0.25 + Math.random() * 0.45).toFixed(2); }             // spice fleck
+      html += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + rad + '" fill="' + fill + '" fill-opacity="' + op + '"/>';
     }
     g.innerHTML = html;
     // batch number flourish
