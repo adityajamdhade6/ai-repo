@@ -6,6 +6,7 @@
   "use strict";
   var FLAVOURS = window.INHAUS_FLAVOURS || [];
   var byId = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return (n < 10 ? "0" : "") + n; };
   var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   var root = document.documentElement;
 
@@ -236,7 +237,7 @@
         '<button type="button" role="tab" aria-selected="' + (i === 0) + '">' +
         '<span class="flavour-li__dot"></span>' +
         '<span class="flavour-li__name">' + f.name + '</span>' +
-        '<span class="flavour-li__idx mono">0' + (i + 1) + '</span></button>';
+        '<span class="flavour-li__idx mono">' + pad(i + 1) + '</span></button>';
       var btn = li.querySelector("button");
       var go = function () { select(i); };
       btn.addEventListener("mouseenter", function () { if (!reduce) select(i); });
@@ -259,13 +260,14 @@
       // swap animation
       stage.classList.add("swap");
       setTimeout(function () { stage.classList.remove("swap"); }, 520);
-      byId("stageIdx").textContent = "0" + (i + 1) + " / 0" + FLAVOURS.length;
+      byId("stageIdx").textContent = pad(i + 1) + " / " + pad(FLAVOURS.length);
       var info = stage.querySelector(".flavour-stage__info");
       info.classList.remove("swap-fade"); void info.offsetWidth; info.classList.add("swap-fade");
       byId("stageName").textContent = f.name;
       byId("stageTag").textContent = f.tag;
       byId("stageDesc").textContent = f.desc;
       byId("stagePrice").textContent = f.price;
+      byId("stageSize").textContent = f.size || "120g";
       // heat
       var heat = byId("stageHeat"); heat.innerHTML = "";
       for (var h = 0; h < 5; h++) { var b = document.createElement("i"); if (h < f.heat) b.className = "on"; heat.appendChild(b); }
