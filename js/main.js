@@ -7,6 +7,15 @@
   var FLAVOURS = window.INHAUS_FLAVOURS || [];
   var byId = function (id) { return document.getElementById(id); };
   var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+  // relative luminance of a #rrggbb colour (0 dark – 1 light)
+  function luminance(hex) {
+    var c = hex.replace("#", "");
+    var rgb = [0, 2, 4].map(function (i) {
+      var v = parseInt(c.substr(i, 2), 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  }
   var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   var root = document.documentElement;
 
@@ -14,6 +23,9 @@
   function applyTheme(f) {
     root.style.setProperty("--accent", f.accent);
     root.style.setProperty("--accent-ink", f.ink);
+    // readable text colour for use ON the saturated accent (auto light/dark)
+    var onAccent = luminance(f.accent) > 0.34 ? "#1a1206" : "#fff7ef";
+    root.style.setProperty("--on-accent", onAccent);
     document.querySelector('meta[name="theme-color"]').setAttribute("content", f.accent);
   }
 

@@ -465,3 +465,62 @@ section{position:relative}
 .box__slot-coin{ box-shadow:0 14px 28px rgba(0,0,0,.45),inset 0 0 0 1.5px rgba(70,40,16,.4),inset 0 -6px 16px rgba(40,22,8,.5) !important; }
 .cart-item__coin{ box-shadow:0 8px 18px rgba(0,0,0,.18),inset 0 0 0 1px rgba(70,40,16,.35) !important; }
 .craft__disc{ box-shadow:0 20px 50px color-mix(in srgb,var(--accent) 30%,rgba(40,22,8,.4)),inset 0 -8px 20px rgba(50,28,10,.4),inset 0 6px 18px rgba(255,238,200,.3) !important; }
+
+/* ============================================================
+   COLOURFUL DIRECTION — bold, product-forward (4700BC energy),
+   kept premium with strong type + auto-contrast on every flavour.
+   Driven by the live --accent / --on-accent variables.
+   ============================================================ */
+:root{ --on-accent:#fff7ef; }
+
+/* --- Hero: a living colour glow behind the coin --- */
+.hero{ transition:background .8s var(--ease); }
+.hero__center::before{
+  content:"";position:absolute;z-index:1;width:min(64vw,720px);aspect-ratio:1;border-radius:50%;
+  top:34%;left:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle, color-mix(in srgb,var(--accent) 46%,transparent), transparent 62%);
+  filter:blur(50px);opacity:.9;transition:background .8s var(--ease);pointer-events:none;
+}
+.hero__center>*{position:relative;z-index:2}
+
+/* --- Flavours: the whole room washes with the flavour --- */
+.flavours{
+  background:
+    radial-gradient(120% 90% at 85% -10%, color-mix(in srgb,var(--accent) 18%,var(--bone)), var(--bone) 55%);
+  transition:background .8s var(--ease);
+}
+
+/* --- The stage becomes a bold, saturated colour card --- */
+.flavour-stage{ background:var(--accent) !important; border-color:transparent !important;
+  box-shadow:0 40px 80px -30px color-mix(in srgb,var(--accent) 70%,transparent); }
+.flavour-stage__coin{ background:radial-gradient(circle at 38% 34%, color-mix(in srgb,var(--on-accent) 28%,transparent), transparent 60%) !important; }
+.flavour-stage__coin::after{ border-color:color-mix(in srgb,var(--on-accent) 35%,transparent) !important; }
+.flavour-stage__idx{ color:color-mix(in srgb,var(--on-accent) 65%,transparent) !important; }
+.flavour-stage__name{ color:var(--on-accent) !important; }
+.flavour-stage__tag{ color:color-mix(in srgb,var(--on-accent) 78%,transparent) !important; }
+.flavour-stage__desc{ color:color-mix(in srgb,var(--on-accent) 86%,transparent) !important; }
+.flavour-stage__price{ color:var(--on-accent) !important; }
+.flavour-stage__price b{ color:var(--on-accent) !important; }
+.flavour-stage .heat i{ background:color-mix(in srgb,var(--on-accent) 28%,transparent); }
+.flavour-stage .heat i.on{ background:var(--on-accent); }
+/* add-to-cart inverts to the readable colour, text in the flavour hue */
+.flavour-stage .btn--solid{ background:var(--on-accent); color:var(--accent); }
+.flavour-stage .btn--solid::before{ background:color-mix(in srgb,var(--on-accent) 80%,#000); }
+.flavour-stage .btn--solid:hover{ color:var(--accent); }
+
+/* --- CTA: full-bleed colour block --- */
+.cta{ background:var(--accent); color:var(--on-accent); transition:background .8s var(--ease); border-top:0; }
+.cta__title{ color:var(--on-accent); }
+.cta__accent{ color:var(--on-accent); opacity:.62; }
+.cta .btn--ghost{ border-color:color-mix(in srgb,var(--on-accent) 55%,transparent); color:var(--on-accent); }
+.cta .btn--ghost::before{ background:var(--on-accent); }
+.cta .btn--ghost:hover{ color:var(--accent); }
+
+/* --- Manifesto: a warm tinted band so colour carries through --- */
+.manifesto{ background:linear-gradient(var(--bone), color-mix(in srgb,var(--accent) 7%,var(--bone))); transition:background .8s var(--ease); border-radius:0; }
+
+/* --- Marquee dots already accent; brighten the bar edge --- */
+.marquee{ border-color:color-mix(in srgb,var(--accent) 40%,var(--ink)); }
+
+/* keep the colour shifts smooth site-wide where accent is used big */
+.eyebrow,.stat__num,.proof__score,.proof__stars{ transition:color .8s var(--ease); }
