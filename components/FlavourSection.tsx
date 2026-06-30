@@ -1,97 +1,115 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import type { Flavour } from "@/lib/flavours";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import Pack from "./Pack";
-import Wave, { Sunburst } from "./Wave";
-import { FloatingIngredients } from "./Ingredients";
+import type { Flavour } from "@/lib/flavours";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+/**
+ * One full-screen poster per flavour. A single colour world (bg + text +
+ * accent), one huge headline, one short line, one CTA, and one large pack
+ * render on a gentle parallax. Product side alternates with the index.
+ */
+export default function FlavourSection({
+  flavour,
+  index,
+}: {
+  flavour: Flavour;
+  index: number;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const productLeft = index % 2 === 1;
 
-export default function FlavourSection({ flavour, index }: { flavour: Flavour; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const flip = index % 2 === 1;
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const packY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const sunRotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [70, -70]);
 
   return (
     <section
       ref={ref}
       id={index === 0 ? "flavours" : flavour.id}
-      data-flavour={flavour.id}
-      className="relative flex min-h-[100svh] items-center overflow-hidden py-24"
+      className="relative flex min-h-[100svh] items-center overflow-hidden px-6 py-24 md:px-12"
       style={{ background: flavour.bg, color: flavour.on }}
     >
-      <Wave color={flavour.wave} opacity={0.4} />
-      <FloatingIngredients items={flavour.ingredients} />
-
-      <div className="relative z-10 mx-auto grid w-full max-w-wide items-center gap-10 px-5 md:grid-cols-2 md:gap-16 md:px-10">
-        {/* COPY */}
-        <motion.div
-          className={`order-2 ${flip ? "md:order-2" : "md:order-1"}`}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.8, ease }}
-        >
-          <div className="mb-5 flex items-center gap-3 font-mono text-xs tracking-[0.22em] opacity-80">
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <span className="h-px w-8" style={{ background: flavour.on, opacity: 0.5 }} />
-            <span>{flavour.kicker.toUpperCase()}</span>
-          </div>
-
-          <h2 className="display text-[clamp(52px,9vw,140px)] leading-[0.9]">{flavour.name}</h2>
-
-          <p className="mt-6 max-w-md text-[clamp(18px,2.4vw,26px)] font-medium leading-snug">{flavour.line}</p>
-          <p className="mt-4 max-w-md text-[clamp(14px,1.6vw,17px)] leading-relaxed opacity-80">{flavour.blurb}</p>
-
-          <div className="mt-7 flex items-center gap-5">
-            <span className="font-mono text-sm tracking-[0.12em] opacity-85">120g · ₹{flavour.price}</span>
-            <Heat n={flavour.heat} on={flavour.on} />
-          </div>
-
-          <a
-            href="#"
-            className="mt-8 inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold transition-transform hover:-translate-y-0.5"
-            style={{ background: flavour.on, color: flavour.bg }}
+      <div
+        className={`mx-auto grid w-full max-w-wide items-center gap-12 md:grid-cols-2 md:gap-16 ${
+          productLeft ? "md:[&>*:first-child]:order-2" : ""
+        }`}
+      >
+        {/* copy */}
+        <div className={productLeft ? "md:pl-6" : "md:pr-6"}>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-15% 0px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-4 font-mono text-[11px] tracking-label"
+            style={{ color: flavour.on }}
           >
-            Shop {flavour.name}
-            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-          </a>
-        </motion.div>
-
-        {/* PACK */}
-        <motion.div
-          className={`relative order-1 mx-auto w-full max-w-sm ${flip ? "md:order-1" : "md:order-2"}`}
-          style={{ y: packY }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.9, ease }}
-        >
-          <motion.div className="absolute -inset-12 -z-10" style={{ rotate: sunRotate }}>
-            <Sunburst color={flavour.accent} className="inset-0 h-full w-full" />
+            <span>{flavour.index}</span>
+            <span className="h-px w-10" style={{ background: flavour.accent }} />
+            <span className="opacity-70">{flavour.kicker}</span>
           </motion.div>
-          <Pack flavour={flavour} />
+
+          <motion.h2
+            initial={reduce ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-15% 0px" }}
+            transition={{ duration: 0.85, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+            className="display mt-7 text-[clamp(60px,11vw,168px)]"
+          >
+            {flavour.headline[0]}
+            <br />
+            <span style={{ color: flavour.accent }}>{flavour.headline[1]}</span>
+          </motion.h2>
+
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-15% 0px" }}
+            transition={{ duration: 0.8, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 max-w-xs text-[16px] leading-snug"
+            style={{ color: flavour.on, opacity: 0.78 }}
+          >
+            {flavour.line}
+          </motion.p>
+
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-15% 0px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10"
+          >
+            <a
+              href="#flavours"
+              className="group inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-medium transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ background: flavour.on, color: flavour.bg }}
+            >
+              Add to box
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* product */}
+        <motion.div style={{ y }} className="flex justify-center">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-12% 0px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="w-[68vw] max-w-[380px] md:w-[40vw]"
+          >
+            <Pack flavour={flavour} />
+          </motion.div>
         </motion.div>
       </div>
     </section>
-  );
-}
-
-function Heat({ n, on }: { n: number; on: string }) {
-  return (
-    <span className="flex gap-1" aria-label={`heat ${n} of 4`}>
-      {Array.from({ length: 4 }).map((_, i) => (
-        <span
-          key={i}
-          className="h-4 w-2 rounded-sm"
-          style={{ background: on, opacity: i < n ? 0.95 : 0.28 }}
-        />
-      ))}
-    </span>
   );
 }

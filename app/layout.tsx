@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Shrikhand, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const grotesk = Space_Grotesk({
+const sans = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-grotesk",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const display = Shrikhand({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
@@ -25,22 +25,21 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "INHAUS — Coin Khakhra, Re-engineered",
+  title: "INHAUS — Coin Khakhra",
   description:
-    "INHAUS makes the coin khakhra a designed object. Whole-grain, slow-roasted, never fried. Five flavours, baked in-house.",
+    "A new shape of crunch. Whole-grain, slow-roasted, never fried coin khakhra in five flavours. Roasted in-house.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#E8612C",
+  themeColor: "#F4F1E9",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${display.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${sans.variable} ${display.variable} ${mono.variable}`}
+    >
       <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>

@@ -1,99 +1,91 @@
-export type Ingredient = "chilli" | "coriander" | "mint" | "puri" | "lime" | "cumin" | "methi" | "peppercorn" | "garlic";
-
 export type Flavour = {
   id: string;
+  /** 01–05, shown as an editorial index */
+  index: string;
   name: string;
-  /** short two-word kicker shown above the name */
+  /** small kicker above the headline */
   kicker: string;
-  /** one-line minimal description */
+  /** the big two-line poster headline */
+  headline: [string, string];
+  /** one short supporting line — max one sentence */
   line: string;
-  /** longer support line */
-  blurb: string;
-  heat: number; // 0-4
-  price: number;
-  /** main background colour for the section */
+  heat: number; // 0–4
+  /** flavour-world background */
   bg: string;
-  /** ink/text colour that reads on bg */
+  /** text colour that reads on bg */
   on: string;
-  /** the coin / pack accent colour */
+  /** single accent used inside the pack + small marks */
   accent: string;
-  /** secondary colour for the wavy pattern */
+  /** softer tone for the lower pack body */
   wave: string;
-  /** ingredients that float around the pack */
-  ingredients: Ingredient[];
-  /** optional real product photo: drop a file in public/products and set the path */
+  /** optional real product photo; drop a file in public/products */
   image?: string;
 };
 
 export const FLAVOURS: Flavour[] = [
   {
     id: "magic-masala",
+    index: "01",
     name: "Magic Masala",
-    kicker: "The Crowd Favourite",
-    line: "Bold, tangy, unmistakably street.",
-    blurb: "A loud blend of dry mango, red chilli and toasted spice — the flavour everyone reaches for first.",
+    kicker: "The crowd favourite",
+    headline: ["Loud", "by nature."],
+    line: "Dry mango, red chilli, toasted spice.",
     heat: 3,
-    price: 180,
-    bg: "#E8612C",
-    on: "#FFF7EE",
-    accent: "#FFC04D",
-    wave: "#C94A1B",
-    ingredients: ["chilli", "coriander", "cumin"],
+    bg: "#D8552A",
+    on: "#FCEFE2",
+    accent: "#F4A93B",
+    wave: "#B6431E",
   },
   {
     id: "pani-puri",
+    index: "02",
     name: "Pani Puri",
-    kicker: "Chaos, Bottled",
-    line: "Minty, sour, impossibly fresh.",
-    blurb: "That first-bite pani-puri rush — pudina, black salt and tang — rebuilt as a crisp little coin.",
+    kicker: "Chaos, bottled",
+    headline: ["Cool,", "then kick."],
+    line: "Mint, black salt, a sour little rush.",
     heat: 2,
-    price: 180,
-    bg: "#2F9E5B",
-    on: "#F2FBF4",
-    accent: "#BFE9C9",
-    wave: "#247A47",
-    ingredients: ["mint", "puri", "lime"],
+    bg: "#1F7A4D",
+    on: "#EAF6EC",
+    accent: "#A8D88E",
+    wave: "#155C39",
   },
   {
     id: "zeera",
+    index: "03",
     name: "Zeera",
-    kicker: "The Purist",
-    line: "Toasted cumin. Sea salt. Nothing to hide.",
-    blurb: "Stripped back to the roast itself — warm jeera and flake salt, the way a khakhra is meant to taste.",
+    kicker: "The purist",
+    headline: ["Nothing", "to hide."],
+    line: "Toasted cumin. Sea salt. That's it.",
     heat: 1,
-    price: 170,
-    bg: "#E4D2A6",
-    on: "#2A2212",
-    accent: "#A9853F",
-    wave: "#CDB67F",
-    ingredients: ["cumin", "coriander"],
+    bg: "#E3D4AE",
+    on: "#322713",
+    accent: "#A9803E",
+    wave: "#CDB988",
   },
   {
     id: "methi",
+    index: "04",
     name: "Methi",
-    kicker: "Quietly Classic",
-    line: "Fenugreek, ajwain, earth.",
-    blurb: "Hand-folded methi leaf and a pinch of ajwain — herbal, grown-up, and the most traditional of the lot.",
+    kicker: "Quietly classic",
+    headline: ["A grown-up", "crunch."],
+    line: "Fenugreek, ajwain, a little earth.",
     heat: 1,
-    price: 170,
-    bg: "#6E7C3A",
-    on: "#F6F8EC",
-    accent: "#C7D88B",
-    wave: "#56612C",
-    ingredients: ["methi", "cumin"],
+    bg: "#5E6B33",
+    on: "#F1F0E0",
+    accent: "#C3CF84",
+    wave: "#48541F",
   },
   {
     id: "schezwan",
+    index: "05",
     name: "Schezwan",
-    kicker: "Handle With Care",
-    line: "Fiery, garlicky, gloriously loud.",
-    blurb: "Sichuan-style heat with roasted garlic and a long burn — the coin people warn each other about.",
+    kicker: "Handle with care",
+    headline: ["Plays", "with fire."],
+    line: "Sichuan heat, roasted garlic, long burn.",
     heat: 4,
-    price: 190,
-    bg: "#D62828",
-    on: "#FFF1F1",
-    accent: "#FF9E6B",
-    wave: "#A81D1D",
-    ingredients: ["chilli", "garlic", "peppercorn"],
+    bg: "#B11E26",
+    on: "#FAE9E2",
+    accent: "#F2895A",
+    wave: "#8E141B",
   },
 ];

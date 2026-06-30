@@ -9,22 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bone: "#F5F1E8",
-        ink: "#15130E",
-        // flavour palette
-        masala: "#E8612C",
-        panipuri: "#2F9E5B",
-        zeera: "#E4D2A6",
-        methi: "#6E7C3A",
-        schezwan: "#D62828",
+        bone: "#F4F1E9",
+        paper: "#FBF9F3",
+        ink: "#16130F",
+        // flavour worlds
+        masala: "#D8552A",
+        panipuri: "#1F7A4D",
+        zeera: "#E3D4AE",
+        methi: "#5E6B33",
+        schezwan: "#B11E26",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
-        grotesk: ["var(--font-grotesk)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
-        wide: "1440px",
+        wide: "1500px",
+      },
+      letterSpacing: {
+        label: "0.34em",
       },
     },
   },

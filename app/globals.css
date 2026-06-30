@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --bone: #f5f1e8;
-  --ink: #15130e;
+  --bone: #f4f1e9;
+  --ink: #16130f;
 }
 
 * {
@@ -20,7 +20,7 @@ body {
   background: var(--bone);
   color: var(--ink);
   overflow-x: hidden;
-  font-family: var(--font-grotesk), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 /* Lenis */
@@ -46,17 +46,18 @@ html.lenis body {
   }
 }
 
+/* huge editorial display type */
 .display {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
 }
 
-/* utility: balance long headings */
 .balance {
   text-wrap: balance;
 }
 
-/* hide scrollbar on horizontal rails */
 .no-bar::-webkit-scrollbar {
   display: none;
 }
