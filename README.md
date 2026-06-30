@@ -1,42 +1,56 @@
 # INHAUS
 
-**The coin khakhra, re-engineered.**
-An original D2C brand experience for a premium Coin Khakhra — built from scratch, not from a Shopify template.
+**The Coin Khakhra, re-engineered.**
+A bold, colourful, editorial D2C site for INHAUS coin khakhra — original implementation, no copied assets. Design language inspired (only) by premium maximalist snack sites: full-screen colour sections, oversized type, big product renders, floating ingredients, sunburst + wavy patterns, scroll-based storytelling.
 
-> _"If Apple, Nothing, and a modern snack startup designed a Coin Khakhra website."_
+## Stack
 
-The full research + design rationale lives in **[STRATEGY.md](STRATEGY.md)**.
+- **Next.js 15** (App Router) + **TypeScript**
+- **Tailwind CSS** for styling
+- **Framer Motion** — scroll reveals, parallax, marquees
+- **GSAP** (+ ScrollTrigger) — hero reveal & coin parallax
+- **Lenis** — smooth scrolling
 
-## What's inside
-
-A self-contained, dependency-free site. No build step, no framework, no copied assets — every coin, ring and texture is generated with CSS/SVG.
+## Structure
 
 ```
-index.html        # structure
-css/styles.css    # the full visual system + responsive + reduced-motion
-js/data.js        # flavour line-up (each carries its own accent token)
-js/main.js        # interactions
-STRATEGY.md       # research & design strategy
+app/
+  layout.tsx        fonts (Shrikhand / Space Grotesk / JetBrains Mono) + Lenis
+  page.tsx          assembles the page
+  globals.css
+components/
+  Nav, Hero, FlavourSection, WhyInhaus, IngredientsSection, Reviews, Footer
+  Coin     generated roasted-khakhra product render (CSS/SVG)
+  Pack     original stand-up pouch render
+  Ingredients  original ingredient marks + floating layer
+  Wave     wavy background + sunburst
+  SmoothScroll Lenis wrapper
+lib/
+  flavours.ts   the 5-flavour line-up + colours
+  texture.ts    deterministic khakhra speckle texture
+public/products/  drop real photos here (see README inside)
 ```
 
-## The experience
+## Sections
 
-- **The coin as a system** — a precision-machined spinning hero coin; the khakhra *is* a disc, so the disc is the whole identity.
-- **Live flavour theming** — hover/select a flavour and the entire page re-themes to its accent via CSS variables.
-- **Sticky "Craft" process** — the roast story reveals step-by-step on scroll.
-- **Technical spec sheet** — a Nothing-style mono table instead of marketing fluff.
-- **Build-a-box configurator** — fill six slots, watch the live count + price, save on the full case.
-- **Slide-in cart** with quantity controls and a free-shipping meter.
-- **Custom magnetic cursor, marquee, count-up stats, scroll reveals, boot loader.**
-- Fully responsive; honours `prefers-reduced-motion`; semantic + keyboard-operable.
+1. **Hero** — oversized type, big coin render, GSAP reveal + scroll parallax, CTA.
+2. **Five flavour sections** — one full-screen each, editorial alternating layout, own colour, big pack render, floating ingredients, sunburst + waves, minimal copy:
+   Magic Masala (orange) · Pani Puri (green) · Zeera (beige) · Methi (olive) · Schezwan (red).
+3. **Why INHAUS** — editorial cards.
+4. **What's Inside** — honest ingredient spec sheet.
+5. **Reviews** — auto-scrolling testimonial marquee.
+6. **Footer** — newsletter + oversized wordmark.
 
-## Run it
+All product imagery is generated (CSS/SVG). To use real photos, drop a file in
+`public/products/` and set the flavour's `image` field in `lib/flavours.ts`
+(see `public/products/README.md`).
 
-No tooling required — open `index.html`, or serve the folder:
+## Run
 
 ```bash
-python3 -m http.server 8099
-# → http://localhost:8099
+npm install
+npm run dev      # http://localhost:3000
+npm run build && npm run start   # production
 ```
 
-Fonts (Space Grotesk + JetBrains Mono) load from Google Fonts, with system fallbacks if offline.
+See `STRATEGY.md` for the original research & design strategy.
