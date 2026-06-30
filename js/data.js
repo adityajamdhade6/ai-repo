@@ -1,6 +1,11 @@
 /* INHAUS — the full coin khakhra line-up.
    Original names + copy. Each carries its own accent token the whole UI inherits.
-   Every coin: Ø38mm · 2.0mm · whole wheat · roasted 180°C · 120g tin. */
+   Every coin: Ø38mm · 2.0mm · whole wheat · roasted 180°C · 120g tin.
+
+   To use a real product PHOTO instead of the generated coin, add an `image`
+   field, e.g.  image: "assets/products/ember.jpg"  (see assets/products/README).
+   Until set, the original generated khakhra coin is shown. Use only photos you
+   own or have a commercial licence for. */
 window.INHAUS_FLAVOURS = [
   {
     id: "ember",

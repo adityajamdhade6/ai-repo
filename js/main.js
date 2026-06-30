@@ -286,6 +286,15 @@
       byId("stageDesc").textContent = f.desc;
       byId("stagePrice").textContent = f.price;
       byId("stageSize").textContent = f.size || "120g";
+      // optional product photo (falls back to the generated coin)
+      var coinEl = byId("stageCoin");
+      if (f.image) {
+        coinEl.classList.add("has-photo");
+        coinEl.style.setProperty("--photo", 'url("' + f.image + '")');
+      } else {
+        coinEl.classList.remove("has-photo");
+        coinEl.style.removeProperty("--photo");
+      }
       // heat
       var heat = byId("stageHeat"); heat.innerHTML = "";
       for (var h = 0; h < 5; h++) { var b = document.createElement("i"); if (h < f.heat) b.className = "on"; heat.appendChild(b); }

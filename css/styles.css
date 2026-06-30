@@ -524,3 +524,13 @@ section{position:relative}
 
 /* keep the colour shifts smooth site-wide where accent is used big */
 .eyebrow,.stat__num,.proof__score,.proof__stars{ transition:color .8s var(--ease); }
+
+/* ============================================================
+   OPTIONAL PRODUCT PHOTO — shown when a flavour sets `image`,
+   otherwise the generated khakhra coin remains the default.
+   ============================================================ */
+.flavour-stage__coin.has-photo::before{
+  background:var(--photo) center/cover no-repeat !important;
+  box-shadow:0 28px 56px -12px rgba(20,12,4,.5), inset 0 0 0 2px rgba(255,255,255,.18) !important;
+}
+.flavour-stage__coin.has-photo::after{ border-color:rgba(255,255,255,.35) !important; }
