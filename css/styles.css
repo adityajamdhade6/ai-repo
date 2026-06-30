@@ -534,3 +534,61 @@ section{position:relative}
   box-shadow:0 28px 56px -12px rgba(20,12,4,.5), inset 0 0 0 2px rgba(255,255,255,.18) !important;
 }
 .flavour-stage__coin.has-photo::after{ border-color:rgba(255,255,255,.35) !important; }
+
+/* ============================================================
+   SHOWCASE — full-bleed alternating product blocks, sunburst
+   backgrounds, funky display type. (Bold maximalist energy.)
+   ============================================================ */
+.funky{ font-family:"Shrikhand",Georgia,serif; font-weight:400; letter-spacing:.005em; }
+
+.showcase{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
+.show-row{ display:grid; grid-template-columns:1fr 1fr; min-height:min(88vh,860px); align-items:stretch; }
+.show-row--flip .show-copy{ order:2; }
+.show-row--flip .show-visual{ order:1; }
+
+.show-copy{ background:var(--bone); display:flex; flex-direction:column; justify-content:center; gap:18px;
+  padding:clamp(36px,6vw,104px); }
+.show-eyebrow{ font-family:var(--f-mono); font-size:12px; letter-spacing:.22em; font-weight:600; color:var(--c); }
+.show-name{ font-size:clamp(46px,7.5vw,118px); line-height:.94; color:var(--c); text-wrap:balance; }
+.show-desc{ font-size:clamp(17px,1.9vw,22px); max-width:34ch; color:var(--ink-2); line-height:1.5; }
+.show-meta{ display:flex; gap:10px; font-size:12px; letter-spacing:.12em; color:var(--ink-2); margin-top:2px; }
+.show-cta{ align-self:flex-start; background:var(--c); color:var(--on-c); margin-top:12px; }
+.show-cta::before{ background:var(--ink); }
+.show-cta:hover{ color:var(--bone); }
+
+.show-visual{ position:relative; background:var(--c); overflow:hidden; display:grid; place-items:center; min-height:46vh; }
+.sunburst{ position:absolute; inset:-40%;
+  background:repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 8deg, var(--pop) 8deg 16deg);
+  opacity:.85; animation:spin 70s linear infinite;
+  -webkit-mask:radial-gradient(circle at 50% 50%, #000 8%, rgba(0,0,0,.85) 30%, transparent 78%);
+          mask:radial-gradient(circle at 50% 50%, #000 8%, rgba(0,0,0,.85) 30%, transparent 78%); }
+@media (prefers-reduced-motion:reduce){ .sunburst{ animation:none; } }
+.show-stage{ position:relative; z-index:2; display:grid; place-items:center; width:100%; height:100%; }
+.show-stage::before{ content:""; position:absolute; width:62%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,247,236,.28), transparent 62%); filter:blur(6px); }
+
+.show-coin{ --kc:var(--c); position:relative; z-index:2; width:clamp(190px,26vw,380px); aspect-ratio:1; border-radius:50%;
+  animation:floaty 6s ease-in-out infinite; filter:drop-shadow(0 30px 44px rgba(20,12,4,.45));
+  background:
+    radial-gradient(ellipse at 62% 66%, color-mix(in srgb,var(--kc) 60%,transparent), transparent 56%),
+    var(--ktex),
+    radial-gradient(circle at 50% 50%, transparent 56%, rgba(46,24,8,.42) 100%),
+    radial-gradient(circle at 38% 30%, #f1ddb0 0%, #d9b074 34%, #a8703a 64%, #6f4420 86%, #4d2e14 100%);
+  background-size:auto,120% 120%,auto,auto; background-blend-mode:soft-light,normal,normal,normal;
+  box-shadow:inset 0 0 0 2px rgba(70,40,16,.35), inset 0 -10px 26px rgba(50,28,10,.45), inset 0 8px 22px rgba(255,238,200,.32); }
+.show-coin.has-photo{ background:var(--photo) center/cover no-repeat !important;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.25), 0 30px 44px rgba(20,12,4,.45) !important; }
+
+.crumb{ position:absolute; border-radius:48% 52% 55% 45%; z-index:1;
+  background:radial-gradient(circle at 38% 32%, #e8cf9c, #9a6630 70%, #5a3414);
+  box-shadow:0 8px 14px rgba(0,0,0,.25); animation:floaty 5s ease-in-out infinite; }
+.crumb--1{ width:34px; height:30px; top:18%; left:16%; animation-delay:.4s; }
+.crumb--2{ width:22px; height:24px; bottom:22%; left:24%; animation-delay:1.1s; }
+.crumb--3{ width:40px; height:34px; bottom:18%; right:15%; animation-delay:.7s; }
+
+@media (max-width:860px){
+  .show-row,.show-row--flip{ grid-template-columns:1fr; }
+  .show-row--flip .show-copy,.show-row--flip .show-visual{ order:initial; }
+  .show-visual{ order:-1; min-height:54vh; }
+  .show-copy{ padding:clamp(34px,8vw,56px); }
+}

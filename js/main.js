@@ -305,6 +305,52 @@
   })();
 
   /* ============================================================
+     SHOWCASE — full-bleed alternating product blocks (sunburst)
+     ============================================================ */
+  (function showcase() {
+    var host = byId("showcase");
+    if (!host) return;
+    // featured flavours + playful eyebrow + clashing "pop" colour for the sunburst
+    var FEATURED = [
+      { id: "ember",    eyebrow: "HOT & BOTHERED",    pop: "#FFD400" },
+      { id: "cheddar",  eyebrow: "CHEESE-PULL ENERGY", pop: "#FF2E7E" },
+      { id: "masala",   eyebrow: "STREET CRED",        pop: "#FFD400" },
+      { id: "golgappa", eyebrow: "CHAOS, BOTTLED",     pop: "#FF7A1F" }
+    ];
+    FEATURED.forEach(function (item, i) {
+      var f = flav(item.id);
+      if (!f) return;
+      var row = document.createElement("article");
+      row.className = "show-row" + (i % 2 ? " show-row--flip" : "");
+      row.style.setProperty("--c", f.accent);
+      row.style.setProperty("--pop", item.pop);
+      row.style.setProperty("--on-c", luminance(f.accent) > 0.34 ? "#1a1206" : "#fff7ef");
+      var coinStyle = f.image ? ' style="--photo:url(&quot;' + f.image + '&quot;)" class="show-coin has-photo"' : ' class="show-coin"';
+      row.innerHTML =
+        '<div class="show-copy">' +
+          '<span class="show-eyebrow">' + item.eyebrow + '</span>' +
+          '<h2 class="show-name funky">' + f.name + '</h2>' +
+          '<p class="show-desc">' + f.desc + '</p>' +
+          '<div class="show-meta mono"><span>' + f.size + '</span><span>·</span><span>₹' + f.price + '</span><span>·</span><span>' + heatText(f.heat) + '</span></div>' +
+          '<button class="btn show-cta" data-add="' + f.id + '"><span>Shop now</span>' +
+            '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>' +
+        '</div>' +
+        '<div class="show-visual">' +
+          '<div class="sunburst" aria-hidden="true"></div>' +
+          '<div class="show-stage"><div' + coinStyle + '></div>' +
+            '<span class="crumb crumb--1"></span><span class="crumb crumb--2"></span><span class="crumb crumb--3"></span>' +
+          '</div>' +
+        '</div>';
+      host.appendChild(row);
+    });
+    host.querySelectorAll("[data-add]").forEach(function (b) {
+      b.addEventListener("click", function () { addToCart(b.dataset.add); });
+      if (window.__cursorBind) window.__cursorBind(b);
+    });
+    function heatText(h) { return h <= 1 ? "MILD" : h === 2 ? "MED" : h === 3 ? "HOT" : "FIRE"; }
+  })();
+
+  /* ============================================================
      CRAFT — sticky step highlighter
      ============================================================ */
   (function craft() {
