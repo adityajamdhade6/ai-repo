@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-flavour="ember">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INHAUS — The Coin Khakhra, Re-engineered</title>
+  <meta name="description" content="INHAUS makes the coin khakhra a designed object. Whole-grain, slow-roasted, never fried. Bite-sized discs engineered in-house." />
+  <meta name="theme-color" content="#11100E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2311100E'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23E4571B' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23E4571B'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- ░░ Custom cursor ░░ -->
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"></span>
+  </div>
+
+  <!-- ░░ Grain / noise overlay ░░ -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ░░ Boot / loader ░░ -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__inner">
+      <span class="boot__mark">INHAUS</span>
+      <span class="boot__bar"><i></i></span>
+      <span class="boot__pct mono"><b id="bootPct">00</b>%</span>
+    </div>
+  </div>
+
+  <!-- ░░ Header ░░ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" data-magnetic aria-label="INHAUS home">
+      <span class="nav__coin"></span>
+      <span class="nav__word">INHAUS</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#flavours" data-link>Flavours</a>
+      <a href="#craft" data-link>Craft</a>
+      <a href="#spec" data-link>Spec</a>
+      <a href="#box" data-link>Build a box</a>
+    </nav>
+    <div class="nav__right">
+      <button class="cart-btn" id="cartOpen" data-magnetic aria-label="Open cart">
+        <span class="mono">CART</span>
+        <span class="cart-btn__count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <i></i><i></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ░░ Mobile menu ░░ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#flavours" data-link>Flavours</a>
+    <a href="#craft" data-link>Craft</a>
+    <a href="#spec" data-link>Spec</a>
+    <a href="#box" data-link>Build a box</a>
+    <a href="#story" data-link>Story</a>
+  </div>
+
+  <main id="top">
+    <!-- ░░░░░░░░░░ HERO ░░░░░░░░░░ -->
+    <section class="hero" id="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+
+      <div class="hero__meta mono">
+        <span>EST. IN-HAUS</span>
+        <span class="hero__meta-mid">Ø38·0MM / 2·0MM / 0% PALM</span>
+        <span>BATCH №<b id="batchNo">001</b></span>
+      </div>
+
+      <div class="hero__center">
+        <!-- The coin: an original CSS/SVG object -->
+        <div class="coin" id="heroCoin" data-magnetic aria-hidden="true">
+          <div class="coin__face">
+            <svg viewBox="0 0 300 300" class="coin__svg">
+              <defs>
+                <radialGradient id="coinG" cx="38%" cy="32%" r="75%">
+                  <stop offset="0%" stop-color="#fff7ec" stop-opacity=".9"/>
+                  <stop offset="45%" stop-color="var(--accent)"/>
+                  <stop offset="100%" stop-color="#6e2a0b"/>
+                </radialGradient>
+              </defs>
+              <circle cx="150" cy="150" r="148" fill="url(#coinG)"/>
+              <circle cx="150" cy="150" r="132" fill="none" stroke="#11100e" stroke-opacity=".18" stroke-width="1.5"/>
+              <circle cx="150" cy="150" r="112" fill="none" stroke="#11100e" stroke-opacity=".12" stroke-width="1"/>
+              <g id="coinHoles"></g>
+              <g class="coin__type">
+                <path id="coinTextPath" d="M150,150 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0" fill="none"/>
+                <text font-family="JetBrains Mono, monospace" font-size="15" letter-spacing="6" fill="#11100e" fill-opacity=".55">
+                  <textPath href="#coinTextPath" startOffset="0">INHAUS · ROASTED IN-HAUS · COIN KHAKHRA · INHAUS · ROASTED IN-HAUS · </textPath>
+                </text>
+              </g>
+              <circle cx="150" cy="150" r="46" fill="none" stroke="#11100e" stroke-opacity=".25" stroke-width="1"/>
+              <circle cx="150" cy="150" r="6" fill="#11100e" fill-opacity=".4"/>
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="line"><span>THE COIN</span></span>
+          <span class="line"><span>KHAKHRA,</span></span>
+          <span class="line line--accent"><span>RE-ENGINEERED.</span></span>
+        </h1>
+      </div>
+
+      <div class="hero__foot">
+        <p class="hero__lede">Whole-grain discs, slow-roasted at 180°&mdash;never fried. Snacking, taken apart and built back better, in&nbsp;our&nbsp;house.</p>
+        <a href="#flavours" class="btn btn--solid" data-magnetic data-link>
+          <span>Taste the line-up</span>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+      </div>
+
+      <button class="scroll-cue mono" data-link data-href="#manifesto" aria-hidden="true">
+        SCROLL<i></i>
+      </button>
+    </section>
+
+    <!-- ░░░░░░░░░░ MARQUEE ░░░░░░░░░░ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>BAKED&nbsp;NEVER&nbsp;FRIED</span><span class="dot">●</span>
+        <span>14G&nbsp;WHOLE&nbsp;GRAIN</span><span class="dot">●</span>
+        <span>0%&nbsp;PALM&nbsp;OIL</span><span class="dot">●</span>
+        <span>ROASTED&nbsp;TO&nbsp;ORDER</span><span class="dot">●</span>
+        <span>BAKED&nbsp;NEVER&nbsp;FRIED</span><span class="dot">●</span>
+        <span>14G&nbsp;WHOLE&nbsp;GRAIN</span><span class="dot">●</span>
+        <span>0%&nbsp;PALM&nbsp;OIL</span><span class="dot">●</span>
+        <span>ROASTED&nbsp;TO&nbsp;ORDER</span><span class="dot">●</span>
+      </div>
+    </div>
+
+    <!-- ░░░░░░░░░░ MANIFESTO ░░░░░░░░░░ -->
+    <section class="manifesto" id="manifesto">
+      <p class="reveal-words">
+        We grew up on the khakhra tin&mdash;<em>the round one, the coin.</em> Snapped in half at 4pm,
+        dusted in masala, never quite premium. So we took it into our house, kept the soul,
+        and engineered out everything else: <b>the oil, the guilt, the boredom.</b>
+      </p>
+    </section>
+
+    <!-- ░░░░░░░░░░ STATS ░░░░░░░░░░ -->
+    <section class="stats">
+      <div class="stat" data-reveal>
+        <span class="stat__num mono" data-count="180" data-suffix="°C">0</span>
+        <span class="stat__label">slow-roast, never the fryer</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat__num mono" data-count="2" data-suffix="mm" data-decimals="1">0</span>
+        <span class="stat__label">precision thickness, every disc</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat__num mono" data-count="48" data-suffix="">0</span>
+        <span class="stat__label">coins in a tin, counted</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat__num mono" data-count="0" data-suffix="%">0</span>
+        <span class="stat__label">palm oil, maida, apology</span>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ FLAVOURS ░░░░░░░░░░ -->
+    <section class="flavours" id="flavours">
+      <div class="section-head">
+        <span class="eyebrow mono">02 — THE LINE-UP</span>
+        <h2 class="section-title">Six coins.<br/>Pick a side.</h2>
+        <p class="section-sub">Hover a coin to load its profile. The whole room changes colour to match the flavour you're holding.</p>
+      </div>
+
+      <div class="flavours__layout">
+        <!-- Selector rail -->
+        <ul class="flavour-rail" id="flavourRail" role="tablist" aria-label="Flavours"></ul>
+
+        <!-- Detail stage -->
+        <div class="flavour-stage" id="flavourStage">
+          <div class="flavour-stage__coin" id="stageCoin" aria-hidden="true"></div>
+          <div class="flavour-stage__info">
+            <span class="flavour-stage__idx mono" id="stageIdx">01 / 06</span>
+            <h3 class="flavour-stage__name" id="stageName">Ember Chilli</h3>
+            <p class="flavour-stage__tag mono" id="stageTag">PERI · SMOKE · SLOW HEAT</p>
+            <p class="flavour-stage__desc" id="stageDesc"></p>
+            <div class="flavour-stage__row">
+              <div class="heat" id="stageHeat" aria-label="Heat level"></div>
+              <span class="flavour-stage__price mono"><b id="stagePrice">180</b> / tin</span>
+            </div>
+            <button class="btn btn--solid btn--full" id="stageAdd" data-magnetic>
+              <span>Add to cart</span>
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ CRAFT (sticky process) ░░░░░░░░░░ -->
+    <section class="craft" id="craft">
+      <div class="craft__sticky">
+        <span class="eyebrow mono">03 — THE CRAFT</span>
+        <div class="craft__steps" id="craftSteps">
+          <h2 class="craft__step is-active" data-step="0"><span class="mono">01</span> Whole grain, milled coarse.</h2>
+          <h2 class="craft__step" data-step="1"><span class="mono">02</span> Hand-rolled to 2&nbsp;millimetres.</h2>
+          <h2 class="craft__step" data-step="2"><span class="mono">03</span> Pressed into the coin.</h2>
+          <h2 class="craft__step" data-step="3"><span class="mono">04</span> Slow-roasted, never fried.</h2>
+          <h2 class="craft__step" data-step="4"><span class="mono">05</span> Sealed within the hour.</h2>
+        </div>
+      </div>
+      <div class="craft__viz" id="craftViz" aria-hidden="true">
+        <div class="craft__ring"></div>
+        <div class="craft__ring"></div>
+        <div class="craft__ring"></div>
+        <div class="craft__disc"></div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ SPEC SHEET ░░░░░░░░░░ -->
+    <section class="spec" id="spec">
+      <div class="section-head">
+        <span class="eyebrow mono">04 — THE SPEC</span>
+        <h2 class="section-title">No marketing.<br/>Just the sheet.</h2>
+      </div>
+      <div class="spec__sheet">
+        <div class="spec__row" data-reveal><span class="mono">DIAMETER</span><span>38.0 mm</span></div>
+        <div class="spec__row" data-reveal><span class="mono">THICKNESS</span><span>2.0 mm ± 0.2</span></div>
+        <div class="spec__row" data-reveal><span class="mono">BASE</span><span>100% whole wheat</span></div>
+        <div class="spec__row" data-reveal><span class="mono">METHOD</span><span>Roasted at 180°C</span></div>
+        <div class="spec__row" data-reveal><span class="mono">OIL</span><span>Cold-pressed groundnut · 0% palm</span></div>
+        <div class="spec__row" data-reveal><span class="mono">PER TIN</span><span>48 coins · 120 g · 480 kcal</span></div>
+        <div class="spec__row" data-reveal><span class="mono">PRESERVATIVES</span><span>None. Sealed, not stabilised.</span></div>
+        <div class="spec__row" data-reveal><span class="mono">SHELF</span><span>90 days, airtight tin</span></div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ BUILD A BOX ░░░░░░░░░░ -->
+    <section class="box" id="box">
+      <div class="section-head">
+        <span class="eyebrow mono">05 — BUILD A BOX</span>
+        <h2 class="section-title">Six slots.<br/>Your call.</h2>
+        <p class="section-sub">Fill the case with any mix. Six tins ships free and saves you ₹140.</p>
+      </div>
+
+      <div class="box__layout">
+        <div class="box__case" id="boxCase" aria-label="Your box, six slots"></div>
+        <div class="box__picker">
+          <p class="mono box__hint">TAP A FLAVOUR TO DROP IT IN A SLOT</p>
+          <ul class="box__chips" id="boxChips"></ul>
+          <div class="box__summary">
+            <div class="box__meter"><i id="boxMeter"></i></div>
+            <div class="box__total">
+              <span class="mono" id="boxFilled">0 / 6 slots</span>
+              <span class="box__price mono">₹<b id="boxPrice">0</b></span>
+            </div>
+            <button class="btn btn--solid btn--full" id="boxAdd" data-magnetic disabled>
+              <span>Add the case</span>
+            </button>
+            <button class="box__clear mono" id="boxClear">clear box</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ STORY ░░░░░░░░░░ -->
+    <section class="story" id="story">
+      <div class="story__grid">
+        <div class="story__col" data-reveal>
+          <span class="eyebrow mono">06 — IN-HAUS</span>
+          <p class="story__big">It started as a tin on a kitchen counter, not a deck in a boardroom.</p>
+        </div>
+        <div class="story__col story__col--text" data-reveal>
+          <p>INHAUS is short for <b>in-house</b>&mdash;the place every good khakhra was born, and the only standard we cook to. We don't outsource the roast, we don't borrow a recipe, and we don't fry to cut a corner.</p>
+          <p>Every coin is rolled, pressed and roasted under one roof, then sealed before the heat leaves it. What ships to you is exactly what we'd snap in half at 4&nbsp;o'clock ourselves.</p>
+          <ul class="story__list mono">
+            <li><span>—</span> One kitchen. One roast.</li>
+            <li><span>—</span> Roasted to order, not to inventory.</li>
+            <li><span>—</span> Returns, no questions, first tin's on us.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ REVIEWS ░░░░░░░░░░ -->
+    <section class="proof">
+      <div class="proof__head">
+        <span class="proof__score mono">4.9</span>
+        <div>
+          <div class="proof__stars" aria-hidden="true">★★★★★</div>
+          <span class="mono proof__count">2,140 verified tins</span>
+        </div>
+      </div>
+      <div class="proof__track" id="proofTrack">
+        <blockquote><p>"I forgot it was healthy. That's the whole review."</p><cite class="mono">— Ananya R.</cite></blockquote>
+        <blockquote><p>"Ember Chilli is criminal. The tin is gone in a day."</p><cite class="mono">— Karthik M.</cite></blockquote>
+        <blockquote><p>"Finally a khakhra that looks like it belongs on my desk."</p><cite class="mono">— Priya N.</cite></blockquote>
+        <blockquote><p>"Sent the box as a gift. Got three new orders from one office."</p><cite class="mono">— Dev S.</cite></blockquote>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ CTA ░░░░░░░░░░ -->
+    <section class="cta">
+      <h2 class="cta__title">Snack like<br/>it was <span class="cta__accent">engineered.</span></h2>
+      <a href="#flavours" class="btn btn--ghost btn--lg" data-magnetic data-link>
+        <span>Start with a tin</span>
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <!-- ░░░░░░░░░░ FOOTER ░░░░░░░░░░ -->
+  <footer class="footer">
+    <div class="footer__top">
+      <form class="footer__news" id="newsForm">
+        <label class="mono" for="newsEmail">FIRST-BATCH ACCESS</label>
+        <div class="footer__field">
+          <input type="email" id="newsEmail" placeholder="you@in-haus.co" required />
+          <button type="submit" aria-label="Subscribe" data-magnetic>
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+        <span class="footer__news-note mono" id="newsNote"></span>
+      </form>
+      <nav class="footer__nav" aria-label="Footer">
+        <div><span class="mono">SHOP</span><a href="#flavours" data-link>Flavours</a><a href="#box" data-link>Build a box</a><a href="#spec" data-link>Spec sheet</a></div>
+        <div><span class="mono">HOUSE</span><a href="#story" data-link>Our story</a><a href="#craft" data-link>The craft</a><a href="#">Stockists</a></div>
+        <div><span class="mono">CONTACT</span><a href="#">hello@in-haus.co</a><a href="#">Instagram</a><a href="#">Returns</a></div>
+      </nav>
+    </div>
+    <div class="footer__word" aria-hidden="true">INHAUS</div>
+    <div class="footer__base mono">
+      <span>© 2026 INHAUS FOODS — ROASTED IN-HAUS</span>
+      <span>Ø38·0MM / 2·0MM / 0% PALM</span>
+    </div>
+  </footer>
+
+  <!-- ░░░░░░░░░░ CART DRAWER ░░░░░░░░░░ -->
+  <div class="drawer-scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Cart">
+    <div class="drawer__head">
+      <span class="mono">YOUR CART</span>
+      <button class="drawer__close" id="cartClose" aria-label="Close cart">×</button>
+    </div>
+    <div class="drawer__ship">
+      <div class="drawer__ship-bar"><i id="shipBar"></i></div>
+      <span class="mono" id="shipNote">Add ₹600 for free shipping</span>
+    </div>
+    <ul class="drawer__items" id="cartItems"></ul>
+    <div class="drawer__empty" id="cartEmpty">
+      <span class="drawer__empty-coin"></span>
+      <p>No coins yet.</p>
+      <button class="btn btn--ghost" id="cartEmptyCta" data-link data-href="#flavours">Browse flavours</button>
+    </div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span class="mono">SUBTOTAL</span><span class="mono">₹<b id="cartTotal">0</b></span></div>
+      <button class="btn btn--solid btn--full" id="checkout">Checkout</button>
+      <p class="drawer__note mono">Free returns · Roasted to order · Ships in 48h</p>
+    </div>
+  </aside>
+
+  <!-- ░░ Add-to-cart toast ░░ -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
