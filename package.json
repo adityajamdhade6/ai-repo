@@ -1,5 +1,5 @@
 {
-  "name": "inhaus",
+  "name": "coin-khakhra",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,8 +13,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "framer-motion": "^11.11.17",
-    "gsap": "^3.12.5",
-    "lenis": "^1.1.18"
+    "lucide-react": "^0.454.0"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

@@ -1,56 +1,39 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { IngredientIcon } from "./Ingredients";
 import type { Ingredient } from "@/lib/flavours";
+import { IngredientIcon } from "./Ingredients";
+import Reveal from "./Reveal";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
-const ROWS: { label: string; value: string; icon?: Ingredient }[] = [
-  { label: "BASE", value: "100% whole wheat", icon: "coriander" },
-  { label: "OIL", value: "Cold-pressed groundnut · 0% palm" },
-  { label: "SPICE", value: "Whole, roasted, ground in-haus", icon: "cumin" },
-  { label: "METHOD", value: "Roasted at 180°C, never fried" },
-  { label: "PRESERVATIVES", value: "None. Sealed, not stabilised." },
-  { label: "PER TIN", value: "48 coins · 120g · 480 kcal" },
+const ITEMS: { type: Ingredient; label: string }[] = [
+  { type: "chilli", label: "Red Chilli" },
+  { type: "cumin", label: "Toasted Cumin" },
+  { type: "mint", label: "Fresh Mint" },
+  { type: "methi", label: "Fenugreek Leaf" },
+  { type: "garlic", label: "Roasted Garlic" },
+  { type: "peppercorn", label: "Black Pepper" },
 ];
 
 export default function IngredientsSection() {
   return (
-    <section id="ingredients" className="relative overflow-hidden bg-ink px-5 py-28 text-bone md:px-10 md:py-36">
-      <div className="mx-auto grid max-w-wide gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
-        <div>
-          <span className="font-mono text-xs tracking-[0.22em] text-masala">WHAT&apos;S INSIDE</span>
-          <h2 className="display mt-5 text-[clamp(40px,7vw,104px)] leading-[0.92]">
-            No marketing.
-            <br />
-            Just the sheet.
-          </h2>
-          <p className="mt-6 max-w-sm text-base leading-relaxed text-bone/65">
-            Five flavours, one honest recipe underneath. If it isn&apos;t on this list, it isn&apos;t in the coin.
-          </p>
-          <div className="mt-10 flex gap-4">
-            {(["chilli", "mint", "cumin", "methi"] as Ingredient[]).map((t) => (
-              <span key={t} className="w-10 opacity-90">
-                <IngredientIcon type={t} className="h-full w-full" />
-              </span>
-            ))}
-          </div>
+    <section id="ingredients" className="relative bg-cream py-24 text-black md:py-36">
+      <div className="mx-auto max-w-wide px-5 md:px-10">
+        <div className="max-w-2xl">
+          <Reveal>
+            <span className="text-xs font-bold tracking-[0.25em] text-masala">WHAT&apos;S INSIDE</span>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h2 className="display mt-5 text-[clamp(38px,7vw,100px)] leading-[0.92] lowercase">
+              whole grain.
+              <br />
+              real spice. nothing fake.
+            </h2>
+          </Reveal>
         </div>
 
-        <div className="border-t border-bone/20">
-          {ROWS.map((r, i) => (
-            <motion.div
-              key={r.label}
-              className="flex items-baseline justify-between gap-6 border-b border-bone/15 py-6"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6, ease, delay: i * 0.05 }}
-            >
-              <span className="font-mono text-xs tracking-[0.16em] text-bone/55">{r.label}</span>
-              <span className="text-right text-[clamp(16px,2vw,24px)] font-medium">{r.value}</span>
-            </motion.div>
+        <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-14 sm:grid-cols-3 md:grid-cols-6">
+          {ITEMS.map((it, i) => (
+            <Reveal key={it.type} delay={i * 0.05} className="flex flex-col items-center text-center">
+              <IngredientIcon type={it.type} className="h-20 w-20 md:h-28 md:w-28" />
+              <span className="mt-5 text-sm font-bold tracking-[0.04em]">{it.label}</span>
+            </Reveal>
           ))}
         </div>
       </div>

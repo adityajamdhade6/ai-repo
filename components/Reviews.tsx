@@ -1,45 +1,42 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { Star } from "lucide-react";
+import Reveal from "./Reveal";
 
 const REVIEWS = [
   { q: "I forgot it was healthy. That's the whole review.", a: "Ananya R.", f: "Magic Masala" },
-  { q: "Schezwan is criminal. The tin is gone in a day.", a: "Karthik M.", f: "Schezwan" },
-  { q: "Finally a khakhra that looks like it belongs on my desk.", a: "Priya N.", f: "Zeera" },
-  { q: "Pani Puri in a coin shouldn't work. It absolutely does.", a: "Dev S.", f: "Pani Puri" },
-  { q: "Sent a box as a gift, got three orders from one office.", a: "Meera T.", f: "Methi" },
+  { q: "Schezwan is criminal. The pack is gone in a day.", a: "Karthik M.", f: "Schezwan" },
+  { q: "Pani Puri in a khakhra shouldn't work. It absolutely does.", a: "Dev S.", f: "Pani Puri" },
 ];
 
 export default function Reviews() {
-  const loop = [...REVIEWS, ...REVIEWS];
   return (
-    <section id="reviews" className="overflow-hidden bg-bone py-28 md:py-36">
-      <div className="mx-auto mb-12 flex max-w-wide items-center gap-5 px-5 md:px-10">
-        <span className="display text-[clamp(48px,8vw,86px)] leading-none text-masala">4.9</span>
-        <div>
-          <div className="text-xl tracking-[3px] text-masala">★★★★★</div>
-          <span className="font-mono text-xs text-ink/55">2,140 verified tins</span>
+    <section id="reviews" className="bg-cream py-24 text-black md:py-32">
+      <div className="mx-auto max-w-wide px-5 md:px-10">
+        <Reveal>
+          <div className="flex flex-wrap items-end gap-6">
+            <span className="display text-[clamp(56px,9vw,100px)] leading-none text-masala">4.9</span>
+            <div className="pb-2">
+              <div className="flex gap-1 text-masala">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={20} fill="currentColor" strokeWidth={0} />
+                ))}
+              </div>
+              <span className="mt-1 block text-xs font-bold tracking-[0.15em] text-black/55">2,140 VERIFIED PACKS SOLD</span>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {REVIEWS.map((r, i) => (
+            <Reveal key={r.a} delay={i * 0.08} className="border-t-[3px] border-black pt-6">
+              <blockquote className="text-[clamp(20px,2.6vw,28px)] font-bold leading-snug">&ldquo;{r.q}&rdquo;</blockquote>
+              <figcaption className="mt-6 flex items-center justify-between text-xs font-bold tracking-[0.1em] text-black/60">
+                <span>{r.a}</span>
+                <span>{r.f}</span>
+              </figcaption>
+            </Reveal>
+          ))}
         </div>
       </div>
-
-      <motion.div
-        className="flex w-max gap-5 px-5 md:px-10"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 38, ease: "linear", repeat: Infinity }}
-      >
-        {loop.map((r, i) => (
-          <figure
-            key={i}
-            className="w-[78vw] shrink-0 rounded-3xl border border-ink/10 bg-white/50 p-8 sm:w-[400px]"
-          >
-            <blockquote className="text-[clamp(18px,2.4vw,24px)] font-medium leading-snug">“{r.q}”</blockquote>
-            <figcaption className="mt-6 flex items-center justify-between font-mono text-xs text-ink/55">
-              <span>— {r.a}</span>
-              <span>{r.f}</span>
-            </figcaption>
-          </figure>
-        ))}
-      </motion.div>
     </section>
   );
 }

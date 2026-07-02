@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --bone: #f5f1e8;
-  --ink: #15130e;
+  --cream: #f7f3eb;
+  --black: #111111;
 }
 
 * {
@@ -17,46 +17,39 @@ html {
 }
 
 body {
-  background: var(--bone);
-  color: var(--ink);
+  background: var(--cream);
+  color: var(--black);
   overflow-x: hidden;
-  font-family: var(--font-grotesk), system-ui, sans-serif;
-}
-
-/* Lenis */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--bone);
+  background: var(--black);
+  color: var(--cream);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 400;
 }
 
-/* utility: balance long headings */
 .balance {
   text-wrap: balance;
 }
 
-/* hide scrollbar on horizontal rails */
 .no-bar::-webkit-scrollbar {
   display: none;
 }
